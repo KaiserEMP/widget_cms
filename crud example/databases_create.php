@@ -12,9 +12,24 @@
     // Juhul kui veateate kood on olemas, teosta siin plokis paiknevad tegevused.
   }
 
-	 $query = "SELECT * FROM pages";
+
+  if (isset($_POST['submit'])){
+  $menu_name = $_POST['menu_name'];
+  $position = $_POST['position'];
+  $visible = $_POST['visible'];
+
+
+	 //$query = "SELECT * FROM pages";
+    $query = "INSERT INTO subjects (menu_name, position, visible)
+            VALUES ('{$menu_name}', {$position}, {$visible})";
 	 $result = mysqli_query($connect, $query);
 
+  if ($result) {
+    $vastus = "Õnnestus";
+  } else {
+    $vastus = "Ebaõnnestus";
+  }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -23,33 +38,45 @@
 	<title>Widget</title>
 </head>
 <body>
-<pre>
-<?php /*
- while ($row = mysqli_fetch_row($result)) {
-   var_dump($row);
- }
- mysqli_free_result($result);
-*/?>
-<?php 
-/*while ($subject = mysqli_fetch_assoc($result)) {
-    echo "<article class='page'><header class='page-header'><h1 class='page-title'>" . $subject['menu_name'] . "</h1></header><div class='page-body'>" . $subject['content'] . "</div></article>";
-  }
-*/
-while ($subject = mysqli_fetch_assoc($result)) {
-    echo "<ul><li>" . $subject['menu_name'] . "</ul></li>";
+
+<?php
+if (isset($_POST['submit'])){
+echo $vastus;
 }
- ?>
-<?php /*
+?>
 
 
-  while ($row = mysqli_fetch_assoc($result)) {
-    echo "<h1>" . $row['menu_name'] . "</h1>";
-  }
+  <form method="post" action="databases_create.php">
+      
+      <label for="menu-name" >Teema :</label>
+      <input id="menu_name" type="text" name="menu_name"></input>
 
-*/
- ?>
-</pre>
+      <label for="menu-name" >Posi :</label>
+      <select id="postition" name ="position">
+        <?php for ($i=1; $i < 18; $i++) {  ?>
+
+        <option value="<?php echo $i;?>"><?php echo $i;?></option>
+
+        <?php
+         }
+         ?>
+
+
+      </select>
+
+      <label for="menu-name" >Invis :</label>
+     <select id="visible" name="visible">
+
+        <option value="1">Nähtav</option>
+        <option value="0">Peidetud</option>
+
+        </select>
+      <input type="submit" name="submit" value="Saada">
+
+  </form>
+
 </body>
 </html>
 
-<?php mysqli_close($connect); ?>
+<?php 
+mysqli_close($connect) ?>
