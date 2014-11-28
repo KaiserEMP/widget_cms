@@ -35,10 +35,14 @@
     echo "<article class='page'><header class='page-header'><h1 class='page-title'>" . $subject['menu_name'] . "</h1></header><div class='page-body'>" . $subject['content'] . "</div></article>";
   }
 */
-while ($subject = mysqli_fetch_assoc($result)) {
-    echo "<ul><li>" . $subject['menu_name'] . "</ul></li>";
-}
- ?>
+while ($subject = mysqli_fetch_assoc($result)) { ?>
+<ul><li class="page-title"><?php echo $subject['menu_name'];?></li></ul>
+<a href="databases_update.php?id=<?php echo $subject['id'];?>">Muuda</a>
+<?php }?>
+<?php mysqli_free_result($result);?>
+
+
+
 <?php /*
 
 
