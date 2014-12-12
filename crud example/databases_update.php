@@ -13,38 +13,34 @@
   }
 
 
+
+if (!isset($_GET['id'])) {
  
-
-
+}
 $id = $_GET['id'];
-$query = "SELECT * FROM subjects where id = {$id}";
-$result = mysqli_query($connect, $query );
-
-$subject = mysqli_fetch_assoc($result);
-$menu_name = $subject['menu_name'];
-$position = $subject['position'];
-$visible = $subject['visible'];
-
-
   if (isset($_POST['submit'])){
   $menu_name = $_POST['menu_name'];
   $position = $_POST['position'];
   $visible = $_POST['visible'];
-
-
-  $query = "UPDATE subjects SET
-            menu_name = {'$menu_name'},
+    $query = "UPDATE subjects SET
+            menu_name = '{$menu_name}',
             position = {$position},
             visible = {$visible}
             WHERE id = {$id}";
-
-	 $result = mysqli_query($connect, $query);
-
+  $result = mysqli_query($connect, $query);
+  
   if ($result) {
-    $vastus = "Õnnestus";
+    $answer = "Õnnestus";
   } else {
-    $vastus = "Ebaõnnestus";
+    $answer = "Ebaõnnestus";
   }
+}else {
+  $query = "SELECT * FROM subjects WHERE id = $id";
+  $result = mysqli_query($connect, $query);
+  $subject = mysqli_fetch_assoc($result);
+  $menu_name = $subject['menu_name'];
+  $position = $subject['position'];
+  $visible = $subject['visible'];
 }
 ?>
 
@@ -57,7 +53,7 @@ $visible = $subject['visible'];
 
 <?php
 if (isset($_POST['submit'])){
-echo $vastus;
+echo $answer;
 }
 ?>
 
@@ -67,7 +63,7 @@ echo $vastus;
 </pre>
 
 
-  <form method="post" action="databases_update.php?id=<?php echo $subject['$id']; ?>">
+  <form action="databases_update.php?id=<?php echo $id;?>" method="post">
       
       <label for="menu-name" >Teema :</label>
       <input id="menu_name" type="text" name="menu_name"></input>
