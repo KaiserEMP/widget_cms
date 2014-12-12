@@ -11,9 +11,7 @@
   	die("Database connection failed: " . mysqli_connect_error() . " (" . mysqli_connect_errno() . ").");
     // Juhul kui veateate kood on olemas, teosta siin plokis paiknevad tegevused.
   }
-if (!isset($_GET['id'])) {
- 
-}
+
 	 $query = "SELECT * FROM subjects";
 	 $result = mysqli_query($connect, $query);
 
@@ -32,6 +30,7 @@ if (!isset($_GET['id'])) {
  }
  mysqli_free_result($result);
 */?>
+<a href="./databases_create.php">Loo uus!</a>
 <?php 
 /*while ($subject = mysqli_fetch_assoc($result)) {
     echo "<article class='page'><header class='page-header'><h1 class='page-title'>" . $subject['menu_name'] . "</h1></header><div class='page-body'>" . $subject['content'] . "</div></article>";
