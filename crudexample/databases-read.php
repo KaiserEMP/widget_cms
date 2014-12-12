@@ -30,7 +30,7 @@
  }
  mysqli_free_result($result);
 */?>
-<a href="./databases_create.php">Loo uus!</a>
+<h1><a href="./databases_create.php">Loo uus!</a></h1>
 <?php 
 /*while ($subject = mysqli_fetch_assoc($result)) {
     echo "<article class='page'><header class='page-header'><h1 class='page-title'>" . $subject['menu_name'] . "</h1></header><div class='page-body'>" . $subject['content'] . "</div></article>";
@@ -44,7 +44,7 @@ while ($subject = mysqli_fetch_assoc($result)) { ?>
 <?php mysqli_free_result($result);?>
 
 
-
+<h1><a href="../index.php">Tagasi</a></h1>
 <?php /*
 
 

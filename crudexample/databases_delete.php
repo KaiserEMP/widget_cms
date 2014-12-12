@@ -12,7 +12,7 @@
     // Juhul kui veateate kood on olemas, teosta siin plokis paiknevad tegevused.
   }
     $id = $_GET['id'];
-	 $query = "DELETE FROM subjects WHERE id = 2000;";
+	 $query = "DELETE FROM subjects WHERE id = {$id};";
 	 $result = mysqli_query($connect, $query);
 
 
@@ -34,6 +34,7 @@
 	<title>Widget</title>
 </head>
 <body>
+<h1><a href="./databases-read.php">Tagasi</a></h1>
 <pre>
 <?php /*
  while ($row = mysqli_fetch_row($result)) {

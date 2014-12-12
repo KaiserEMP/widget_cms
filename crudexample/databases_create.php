@@ -74,7 +74,7 @@ echo $vastus;
       <input type="submit" name="submit" value="Saada">
 
   </form>
-
+<h1><a href="../index.php">Tagasi</a></h1>
 </body>
 </html>
 
