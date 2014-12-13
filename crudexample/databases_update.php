@@ -1,16 +1,5 @@
 <?php
-	$dbhost = "localhost";
-	$dbuser = "widget_cms";
-	$dbpass = "secretpassword";
-	$dbname = "widget_corp";
-  mysqli_connect("localhost", "widget_cms", "secretpassword", "widget_corp");
-
-  $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-  if (mysqli_connect_errno()) {
-  	die("Database connection failed: " . mysqli_connect_error() . " (" . mysqli_connect_errno() . ").");
-    // Juhul kui veateate kood on olemas, teosta siin plokis paiknevad tegevused.
-  }
+require('../components/config.php');
 
 
 if (!isset($_GET['id'])) {
@@ -22,10 +11,12 @@ $id = $_GET['id'];
   $menu_name = $_POST['menu_name'];
   $position = $_POST['position'];
   $visible = $_POST['visible'];
+  $content = $_POST['content'];
     $query = "UPDATE subjects SET
             menu_name = '{$menu_name}',
             position = {$position},
-            visible = {$visible}
+            visible = {$visible},
+            content = '{$content}'
             WHERE id = {$id}";
   $result = mysqli_query($connect, $query);
   
@@ -41,6 +32,7 @@ $id = $_GET['id'];
   $menu_name = $subject['menu_name'];
   $position = $subject['position'];
   $visible = $subject['visible'];
+
 }
 ?>
 
@@ -51,6 +43,8 @@ $id = $_GET['id'];
   <?php if(isset($_POST['submit'])) { ?>
     <meta http-equiv="refresh" content="2; url=databases-read.php">
    <?php } ?>
+   <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 </head>
 <body>
 
@@ -60,10 +54,6 @@ echo $answer;
 }
 ?>
 
-<pre>
-<?php print_r($_GET);?>
-<?php print_r($_POST);?>
-</pre>
 
 
   <form action="databases_update.php?id=<?php echo $id;?>" method="post">
@@ -91,6 +81,10 @@ echo $answer;
         <option value="0">Peidetud</option>
 
         </select>
+
+      <label for="menu-name" >Text :</label>
+      <textarea id="content" type="text" name="content" rows="4" cols="50"></textarea>
+
       <input type="submit" name="submit" value="Saada">
 
   </form>

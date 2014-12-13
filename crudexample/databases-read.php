@@ -1,50 +1,67 @@
 <?php
-	$dbhost = "localhost";
-	$dbuser = "widget_cms";
-	$dbpass = "secretpassword";
-	$dbname = "widget_corp";
-  mysqli_connect("localhost", "widget_cms", "secretpassword", "widget_corp");
 
-  $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-  if (mysqli_connect_errno()) {
-  	die("Database connection failed: " . mysqli_connect_error() . " (" . mysqli_connect_errno() . ").");
-    // Juhul kui veateate kood on olemas, teosta siin plokis paiknevad tegevused.
-  }
+require('../components/config.php');
 
 	 $query = "SELECT * FROM subjects";
 	 $result = mysqli_query($connect, $query);
 
 ?>
 
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Widget</title>
+
+  <style type="text/css">
+
+  .page-title {
+    width: 200px;
+    background-color: #ccc;
+    list-style: none;
+    color: green;
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 3px;
+
+  }
+  .MK{
+    width:60px;
+    color: black;
+    margin-left: 50px;
+  }
+
+  </style>
 </head>
 <body>
-<pre>
+
+<aside>
 <?php /*
  while ($row = mysqli_fetch_row($result)) {
    var_dump($row);
  }
  mysqli_free_result($result);
 */?>
+<?php if ($editmode == true) { ?>
 <h1><a href="./databases_create.php">Loo uus!</a></h1>
+<?php } ?>
+<h1><a href="../index.php">Tagasi</a></h1>
 <?php 
 /*while ($subject = mysqli_fetch_assoc($result)) {
     echo "<article class='page'><header class='page-header'><h1 class='page-title'>" . $subject['menu_name'] . "</h1></header><div class='page-body'>" . $subject['content'] . "</div></article>";
   }
 */
 while ($subject = mysqli_fetch_assoc($result)) { ?>
-<ul><li class="page-title"><?php echo $subject['menu_name'];?></li></ul>
-<a href="databases_update.php?id=<?php echo $subject['id'];?>">Muuda</a>
-<a href="databases_delete.php?id=<?php echo $subject['id'];?>">Kustuta</a>
-<?php }?>
+<ul><li class="page-title"><a href="../index.php?id=<?php echo $subject['id']; ?>"><?php echo $subject['menu_name']; ?></a></li></ul>
+<?php if ($editmode == true) { ?>
+<a href="databases_update.php?id=<?php echo $subject['id'];?>" class="MK">Muuda</a>
+<a href="databases_delete.php?id=<?php echo $subject['id'];?>" class="MK">Kustuta</a>
+<?php }} ?>
+
 <?php mysqli_free_result($result);?>
+</aside>
 
 
-<h1><a href="../index.php">Tagasi</a></h1>
 <?php /*
 
 
@@ -54,7 +71,7 @@ while ($subject = mysqli_fetch_assoc($result)) { ?>
 
 */
  ?>
-</pre>
+
 </body>
 </html>
 
