@@ -36,6 +36,9 @@
 <html>
 <head>
 	<title>Widget</title>
+    <?php if(isset($_POST['submit'])) { ?>
+    <meta http-equiv="refresh" content="2; url=databases-read.php">
+   <?php } ?>
 </head>
 <body>
 

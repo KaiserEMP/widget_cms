@@ -37,6 +37,7 @@
 <html>
 <head>
 	<title>Widget</title>
+  <meta http-equiv="refresh" content="2; url=databases-read.php">
 </head>
 <body>
 <h1><a href="./databases-read.php">Tagasi</a></h1>
