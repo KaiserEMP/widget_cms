@@ -11,6 +11,11 @@
   	die("Database connection failed: " . mysqli_connect_error() . " (" . mysqli_connect_errno() . ").");
     // Juhul kui veateate kood on olemas, teosta siin plokis paiknevad tegevused.
   }
+
+  if (!isset($_GET['id'])) {
+  header('location:../crudexample/databases-read.php');
+
+}
     $id = $_GET['id'];
 	 $query = "DELETE FROM subjects WHERE id = {$id};";
 	 $result = mysqli_query($connect, $query);

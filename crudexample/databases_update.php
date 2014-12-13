@@ -13,9 +13,9 @@
   }
 
 
-
 if (!isset($_GET['id'])) {
- 
+  header('location:../crudexample/databases-read.php');
+
 }
 $id = $_GET['id'];
   if (isset($_POST['submit'])){
